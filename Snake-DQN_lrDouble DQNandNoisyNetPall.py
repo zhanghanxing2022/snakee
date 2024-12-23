@@ -2,7 +2,7 @@ import argparse
 import matplotlib.pyplot as plt
 import sys
 import time
-from replay_buffer import ReplayMemory
+from replay_buffer import ReplayMemoryPall
 from collections import deque
 from Game import GameEnvironment
 from model import QNetwork, get_network_input, NoisyNet, Net
@@ -262,7 +262,7 @@ def main():
     target_model = Net(Args())
     target_model.load_state_dict(model.state_dict())
     optimizer = torch.optim.Adam(model.parameters(), lr=config.lr)
-    memory = ReplayMemory(config.memory_size)
+    memory = ReplayMemoryPall(config.memory_size)
 
     # 创建训练器并开始训练
     trainer = Trainer(config, model, target_model, optimizer, memory, board)

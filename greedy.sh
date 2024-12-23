@@ -1,4 +1,4 @@
-python /Users/zhanghanxing/Desktop/work/abv/Snakeee/Snake-DQN_DoubleDQNandε-greedy.py \
+python ./Snake-DQN_DoubleDQNandε-greedy.py \
     --gridsize 15 \
     --num_episodes 1200 \
     --target_update_frequency 5 \
@@ -6,7 +6,7 @@ python /Users/zhanghanxing/Desktop/work/abv/Snakeee/Snake-DQN_DoubleDQNandε-gre
     --num_updates 20 \
     --batch_size 512 \
     --num_games 30 \
-    --checkpoint_dir ./greedyTr1e-3_tgt5_iter20 \
+    --checkpoint_dir ./greedyTr1e-3_tgt5_iter20_2 \
     --epsilon_start 1.0 \
     --epsilon_min 0.05 \
     --decay_rate 0.99

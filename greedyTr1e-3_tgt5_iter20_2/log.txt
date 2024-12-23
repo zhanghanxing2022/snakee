@@ -1,0 +1,40 @@
+Ep.:     10, Loss: 0.509, Avg.Score: -53.90, Avg.LenOfSnake: 5.10, Max.LenOfSnake:  7.00 Time: 00:00:01 
+Ep.:     20, Loss: 0.502, Avg.Score: -53.10, Avg.LenOfSnake: 5.17, Max.LenOfSnake:  7.00 Time: 00:00:02 
+Ep.:     30, Loss: 0.613, Avg.Score: -44.50, Avg.LenOfSnake: 5.20, Max.LenOfSnake:  7.00 Time: 00:00:04 
+Ep.:     40, Loss: 0.737, Avg.Score: -48.50, Avg.LenOfSnake: 5.67, Max.LenOfSnake:  9.00 Time: 00:00:06 
+Ep.:     50, Loss: 0.661, Avg.Score: -60.00, Avg.LenOfSnake: 5.40, Max.LenOfSnake:  7.00 Time: 00:00:09 
+Ep.:     60, Loss: 0.567, Avg.Score: -52.50, Avg.LenOfSnake: 5.67, Max.LenOfSnake:  9.00 Time: 00:00:11 
+Ep.:     70, Loss: 0.635, Avg.Score: -49.40, Avg.LenOfSnake: 5.73, Max.LenOfSnake:  8.00 Time: 00:00:13 
+Ep.:     80, Loss: 0.633, Avg.Score: -45.30, Avg.LenOfSnake: 6.07, Max.LenOfSnake:  13.00 Time: 00:00:16 
+Ep.:     90, Loss: 0.843, Avg.Score: -20.20, Avg.LenOfSnake: 6.90, Max.LenOfSnake:  12.00 Time: 00:00:19 
+Ep.:    100, Loss: 0.743, Avg.Score: -31.90, Avg.LenOfSnake: 5.83, Max.LenOfSnake:  11.00 Time: 00:00:22 
+Ep.:    110, Loss: 0.880, Avg.Score: 2.50, Avg.LenOfSnake: 7.20, Max.LenOfSnake:  14.00 Time: 00:00:25 
+Ep.:    120, Loss: 0.911, Avg.Score: -6.40, Avg.LenOfSnake: 6.80, Max.LenOfSnake:  13.00 Time: 00:00:28 
+Ep.:    130, Loss: 0.681, Avg.Score: -26.70, Avg.LenOfSnake: 6.27, Max.LenOfSnake:  9.00 Time: 00:00:32 
+Ep.:    140, Loss: 0.924, Avg.Score: 39.30, Avg.LenOfSnake: 8.67, Max.LenOfSnake:  14.00 Time: 00:00:36 
+Ep.:    150, Loss: 0.835, Avg.Score: 19.10, Avg.LenOfSnake: 7.97, Max.LenOfSnake:  14.00 Time: 00:00:40 
+Ep.:    160, Loss: 0.990, Avg.Score: 77.00, Avg.LenOfSnake: 9.57, Max.LenOfSnake:  19.00 Time: 00:00:44 
+Ep.:    170, Loss: 0.756, Avg.Score: 43.10, Avg.LenOfSnake: 9.20, Max.LenOfSnake:  16.00 Time: 00:00:49 
+Ep.:    180, Loss: 0.784, Avg.Score: 89.30, Avg.LenOfSnake: 10.10, Max.LenOfSnake:  21.00 Time: 00:00:54 
+Ep.:    190, Loss: 0.647, Avg.Score: 157.70, Avg.LenOfSnake: 11.93, Max.LenOfSnake:  28.00 Time: 00:00:59 
+Ep.:    200, Loss: 0.665, Avg.Score: 173.30, Avg.LenOfSnake: 12.63, Max.LenOfSnake:  28.00 Time: 00:01:05 
+Ep.:    210, Loss: 0.691, Avg.Score: 119.80, Avg.LenOfSnake: 10.63, Max.LenOfSnake:  23.00 Time: 00:01:11 
+Ep.:    220, Loss: 0.681, Avg.Score: 168.60, Avg.LenOfSnake: 12.43, Max.LenOfSnake:  24.00 Time: 00:01:18 
+Traceback (most recent call last):
+  File "/Users/zhanghanxing/Desktop/work/abv/Snakeee/./Snake-DQN_DoubleDQNandε-greedy.py", line 199, in <module>
+    scores, avg_scores, avg_len_of_snake, max_len_of_snake = train()
+  File "/Users/zhanghanxing/Desktop/work/abv/Snakeee/./Snake-DQN_DoubleDQNandε-greedy.py", line 173, in train
+    score, avg_len, max_len = run_episode(games_in_episode)
+  File "/Users/zhanghanxing/Desktop/work/abv/Snakeee/./Snake-DQN_DoubleDQNandε-greedy.py", line 90, in run_episode
+    next_state = get_network_input(board.snake, board.apple)
+  File "/Users/zhanghanxing/Desktop/work/abv/Snakeee/model.py", line 258, in get_network_input
+    proximity = player.getproximity()
+  File "/Users/zhanghanxing/Desktop/work/abv/Snakeee/Game.py", line 40, in getproximity
+    proximity = [int(self.checkdead(x)) for x in possdirections]
+  File "/Users/zhanghanxing/Desktop/work/abv/Snakeee/Game.py", line 40, in <listcomp>
+    proximity = [int(self.checkdead(x)) for x in possdirections]
+  File "/Users/zhanghanxing/Desktop/work/abv/Snakeee/Game.py", line 29, in checkdead
+    elif list(pos) in [list(item) for item in self.prevpos[:-1]]:
+  File "/Users/zhanghanxing/Desktop/work/abv/Snakeee/Game.py", line 29, in <listcomp>
+    elif list(pos) in [list(item) for item in self.prevpos[:-1]]:
+KeyboardInterrupt
