@@ -1,0 +1,77 @@
+Ep.:     10, Loss: 32.501, Avg.Score: -56.00, Avg.LenOfSnake: 5.00, Max.LenOfSnake:  5.00 Time: 00:00:08 
+Ep.:     20, Loss: 30.778, Avg.Score: -44.90, Avg.LenOfSnake: 5.13, Max.LenOfSnake:  7.00 Time: 00:00:15 
+Ep.:     30, Loss: 20.398, Avg.Score: -50.40, Avg.LenOfSnake: 5.23, Max.LenOfSnake:  7.00 Time: 00:00:21 
+Ep.:     40, Loss: 13.550, Avg.Score: -59.10, Avg.LenOfSnake: 5.10, Max.LenOfSnake:  6.00 Time: 00:00:29 
+Ep.:     50, Loss: 10.124, Avg.Score: -69.70, Avg.LenOfSnake: 5.03, Max.LenOfSnake:  6.00 Time: 00:00:37 
+Ep.:     60, Loss: 11.903, Avg.Score: -56.50, Avg.LenOfSnake: 5.17, Max.LenOfSnake:  7.00 Time: 00:00:43 
+Ep.:     70, Loss: 10.459, Avg.Score: -62.70, Avg.LenOfSnake: 5.17, Max.LenOfSnake:  6.00 Time: 00:00:51 
+Ep.:     80, Loss: 9.730, Avg.Score: -68.50, Avg.LenOfSnake: 5.33, Max.LenOfSnake:  9.00 Time: 00:01:02 
+Ep.:     90, Loss: 8.999, Avg.Score: -68.60, Avg.LenOfSnake: 5.37, Max.LenOfSnake:  8.00 Time: 00:01:15 
+Ep.:    100, Loss: 11.165, Avg.Score: -61.30, Avg.LenOfSnake: 5.23, Max.LenOfSnake:  6.00 Time: 00:01:26 
+Ep.:    110, Loss: 10.758, Avg.Score: -62.20, Avg.LenOfSnake: 5.67, Max.LenOfSnake:  8.00 Time: 00:01:33 
+Ep.:    120, Loss: 11.870, Avg.Score: -55.10, Avg.LenOfSnake: 5.63, Max.LenOfSnake:  8.00 Time: 00:01:46 
+Ep.:    130, Loss: 11.584, Avg.Score: -63.40, Avg.LenOfSnake: 5.50, Max.LenOfSnake:  7.00 Time: 00:01:55 
+Ep.:    140, Loss: 13.923, Avg.Score: -56.70, Avg.LenOfSnake: 5.67, Max.LenOfSnake:  8.00 Time: 00:02:03 
+Ep.:    150, Loss: 17.061, Avg.Score: -63.70, Avg.LenOfSnake: 5.67, Max.LenOfSnake:  8.00 Time: 00:02:12 
+Ep.:    160, Loss: 14.576, Avg.Score: -75.20, Avg.LenOfSnake: 6.53, Max.LenOfSnake:  10.00 Time: 00:02:22 
+Ep.:    170, Loss: 17.254, Avg.Score: -36.80, Avg.LenOfSnake: 5.93, Max.LenOfSnake:  9.00 Time: 00:02:32 
+Ep.:    180, Loss: 16.287, Avg.Score: -44.90, Avg.LenOfSnake: 5.87, Max.LenOfSnake:  9.00 Time: 00:02:42 
+Ep.:    190, Loss: 20.860, Avg.Score: -35.70, Avg.LenOfSnake: 6.47, Max.LenOfSnake:  10.00 Time: 00:02:51 
+Ep.:    200, Loss: 20.722, Avg.Score: -24.20, Avg.LenOfSnake: 6.77, Max.LenOfSnake:  11.00 Time: 00:03:01 
+Ep.:    210, Loss: 25.195, Avg.Score: -26.00, Avg.LenOfSnake: 6.27, Max.LenOfSnake:  10.00 Time: 00:03:10 
+Ep.:    220, Loss: 17.193, Avg.Score: -36.00, Avg.LenOfSnake: 6.07, Max.LenOfSnake:  8.00 Time: 00:03:20 
+Ep.:    230, Loss: 19.334, Avg.Score: -26.60, Avg.LenOfSnake: 6.37, Max.LenOfSnake:  12.00 Time: 00:03:29 
+Ep.:    240, Loss: 24.011, Avg.Score: -9.90, Avg.LenOfSnake: 6.77, Max.LenOfSnake:  14.00 Time: 00:03:38 
+Ep.:    250, Loss: 18.404, Avg.Score: -22.30, Avg.LenOfSnake: 6.43, Max.LenOfSnake:  11.00 Time: 00:03:47 
+Ep.:    260, Loss: 23.922, Avg.Score: -18.00, Avg.LenOfSnake: 6.37, Max.LenOfSnake:  9.00 Time: 00:03:57 
+Ep.:    270, Loss: 20.837, Avg.Score: -9.30, Avg.LenOfSnake: 6.73, Max.LenOfSnake:  12.00 Time: 00:04:08 
+Ep.:    280, Loss: 22.389, Avg.Score: -16.70, Avg.LenOfSnake: 6.80, Max.LenOfSnake:  11.00 Time: 00:04:20 
+Ep.:    290, Loss: 29.338, Avg.Score: 1.80, Avg.LenOfSnake: 6.63, Max.LenOfSnake:  13.00 Time: 00:04:31 
+Ep.:    300, Loss: 26.469, Avg.Score: 14.70, Avg.LenOfSnake: 7.67, Max.LenOfSnake:  15.00 Time: 00:04:42 
+Ep.:    310, Loss: 25.775, Avg.Score: 10.50, Avg.LenOfSnake: 7.47, Max.LenOfSnake:  11.00 Time: 00:04:54 
+Ep.:    320, Loss: 28.929, Avg.Score: -11.80, Avg.LenOfSnake: 6.67, Max.LenOfSnake:  11.00 Time: 00:05:03 
+Ep.:    330, Loss: 25.827, Avg.Score: -0.90, Avg.LenOfSnake: 7.03, Max.LenOfSnake:  12.00 Time: 00:05:14 
+Ep.:    340, Loss: 28.074, Avg.Score: 10.90, Avg.LenOfSnake: 7.10, Max.LenOfSnake:  13.00 Time: 00:05:24 
+Ep.:    350, Loss: 26.946, Avg.Score: 9.30, Avg.LenOfSnake: 7.27, Max.LenOfSnake:  15.00 Time: 00:05:33 
+Ep.:    360, Loss: 31.446, Avg.Score: 43.80, Avg.LenOfSnake: 8.37, Max.LenOfSnake:  17.00 Time: 00:05:45 
+Ep.:    370, Loss: 28.787, Avg.Score: 26.00, Avg.LenOfSnake: 7.73, Max.LenOfSnake:  15.00 Time: 00:05:55 
+Ep.:    380, Loss: 30.755, Avg.Score: 45.00, Avg.LenOfSnake: 8.57, Max.LenOfSnake:  14.00 Time: 00:06:05 
+Ep.:    390, Loss: 30.899, Avg.Score: 51.90, Avg.LenOfSnake: 8.53, Max.LenOfSnake:  13.00 Time: 00:06:15 
+Ep.:    400, Loss: 37.698, Avg.Score: 56.50, Avg.LenOfSnake: 8.60, Max.LenOfSnake:  13.00 Time: 00:06:23 
+Ep.:    410, Loss: 35.174, Avg.Score: 113.70, Avg.LenOfSnake: 10.47, Max.LenOfSnake:  29.00 Time: 00:06:32 
+Ep.:    420, Loss: 33.711, Avg.Score: 76.70, Avg.LenOfSnake: 9.17, Max.LenOfSnake:  16.00 Time: 00:06:42 
+Ep.:    430, Loss: 26.954, Avg.Score: 69.30, Avg.LenOfSnake: 9.30, Max.LenOfSnake:  20.00 Time: 00:06:52 
+Ep.:    440, Loss: 30.873, Avg.Score: 81.20, Avg.LenOfSnake: 9.50, Max.LenOfSnake:  17.00 Time: 00:07:03 
+Ep.:    450, Loss: 27.922, Avg.Score: 52.90, Avg.LenOfSnake: 8.63, Max.LenOfSnake:  15.00 Time: 00:07:20 
+Ep.:    460, Loss: 29.430, Avg.Score: 151.40, Avg.LenOfSnake: 12.07, Max.LenOfSnake:  21.00 Time: 00:07:30 
+Ep.:    470, Loss: 32.440, Avg.Score: 131.60, Avg.LenOfSnake: 11.13, Max.LenOfSnake:  21.00 Time: 00:07:40 
+Ep.:    480, Loss: 27.388, Avg.Score: 107.30, Avg.LenOfSnake: 10.33, Max.LenOfSnake:  23.00 Time: 00:07:49 
+Ep.:    490, Loss: 28.825, Avg.Score: 97.30, Avg.LenOfSnake: 9.93, Max.LenOfSnake:  16.00 Time: 00:07:59 
+Ep.:    500, Loss: 25.554, Avg.Score: 176.20, Avg.LenOfSnake: 12.70, Max.LenOfSnake:  26.00 Time: 00:08:10 
+Ep.:    510, Loss: 26.175, Avg.Score: 174.20, Avg.LenOfSnake: 12.70, Max.LenOfSnake:  23.00 Time: 00:08:20 
+Ep.:    520, Loss: 26.029, Avg.Score: 154.40, Avg.LenOfSnake: 11.87, Max.LenOfSnake:  24.00 Time: 00:08:31 
+Ep.:    530, Loss: 26.449, Avg.Score: 122.10, Avg.LenOfSnake: 10.67, Max.LenOfSnake:  18.00 Time: 00:08:42 
+Ep.:    540, Loss: 27.286, Avg.Score: 144.20, Avg.LenOfSnake: 11.43, Max.LenOfSnake:  28.00 Time: 00:08:55 
+Ep.:    550, Loss: 25.482, Avg.Score: 122.20, Avg.LenOfSnake: 10.73, Max.LenOfSnake:  20.00 Time: 00:09:06 
+Ep.:    560, Loss: 23.534, Avg.Score: 155.80, Avg.LenOfSnake: 11.83, Max.LenOfSnake:  24.00 Time: 00:09:17 
+Ep.:    570, Loss: 26.547, Avg.Score: 187.00, Avg.LenOfSnake: 12.83, Max.LenOfSnake:  23.00 Time: 00:09:29 
+Ep.:    580, Loss: 21.561, Avg.Score: 176.90, Avg.LenOfSnake: 12.53, Max.LenOfSnake:  25.00 Time: 00:09:42 
+Ep.:    590, Loss: 24.782, Avg.Score: 135.80, Avg.LenOfSnake: 11.40, Max.LenOfSnake:  20.00 Time: 00:09:55 
+Ep.:    600, Loss: 22.489, Avg.Score: 121.00, Avg.LenOfSnake: 11.33, Max.LenOfSnake:  21.00 Time: 00:10:08 
+Ep.:    610, Loss: 22.337, Avg.Score: 231.40, Avg.LenOfSnake: 14.43, Max.LenOfSnake:  30.00 Time: 00:10:20 
+Ep.:    620, Loss: 21.639, Avg.Score: 181.80, Avg.LenOfSnake: 12.77, Max.LenOfSnake:  23.00 Time: 00:10:36 
+Ep.:    630, Loss: 23.967, Avg.Score: 136.60, Avg.LenOfSnake: 11.23, Max.LenOfSnake:  20.00 Time: 00:10:48 
+Ep.:    640, Loss: 23.703, Avg.Score: 183.10, Avg.LenOfSnake: 13.10, Max.LenOfSnake:  29.00 Time: 00:11:02 
+Ep.:    650, Loss: 25.088, Avg.Score: 197.50, Avg.LenOfSnake: 13.40, Max.LenOfSnake:  26.00 Time: 00:11:13 
+Ep.:    660, Loss: 19.938, Avg.Score: 178.40, Avg.LenOfSnake: 12.77, Max.LenOfSnake:  23.00 Time: 00:11:27 
+Ep.:    670, Loss: 21.496, Avg.Score: 193.90, Avg.LenOfSnake: 13.20, Max.LenOfSnake:  25.00 Time: 00:11:41 
+Ep.:    680, Loss: 24.419, Avg.Score: 164.70, Avg.LenOfSnake: 12.30, Max.LenOfSnake:  20.00 Time: 00:11:56 
+Ep.:    690, Loss: 22.781, Avg.Score: 185.30, Avg.LenOfSnake: 13.33, Max.LenOfSnake:  28.00 Time: 00:12:09 
+Traceback (most recent call last):
+  File "/Users/zhanghanxing/Desktop/work/abv/Snakeee/Snake-DQN_lr0.00001Double DQNandNoisyNet.py", line 158, in <module>
+    fig = plt.figure()
+  File "/Users/zhanghanxing/Desktop/work/abv/Snakeee/Snake-DQN_lr0.00001Double DQNandNoisyNet.py", line 142, in train
+    print('Ep.: {:6}, Loss: {:.3f}, Avg.Score: {:.2f}, Avg.LenOfSnake: {:.2f}, Max.LenOfSnake:  {:.2f} Time: {:02}:{:02}:{:02} '.
+  File "/Users/zhanghanxing/Desktop/work/abv/Snakeee/Snake-DQN_lr0.00001Double DQNandNoisyNet.py", line 94, in learn
+    Q_targets_next = torch.max(next_q_value, 1)[0] * (1 - dones)
+KeyboardInterrupt

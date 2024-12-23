@@ -1,0 +1,1 @@
+python "/Users/zhanghanxing/Desktop/work/abv/Snakeee/Snake-DQN_lr0.00001Double DQNandNoisyNet.py" --gridsize 15 --num_episodes 1200 --target_update_frequency 5 --lr 1e-3 --num_updates 20 --batch_size 512 --num_games 30 --checkpoint_dir ./noisynet_2_Tr1e-3_tgt5_iter20

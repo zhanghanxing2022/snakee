@@ -1,0 +1,12 @@
+Traceback (most recent call last):
+  File "/Users/zhanghanxing/Desktop/work/abv/Snakeee/Snake-DQN_DoubleDQNandε-greedy.py", line 197, in <module>
+    scores, avg_scores, avg_len_of_snake, max_len_of_snake = train()
+  File "/Users/zhanghanxing/Desktop/work/abv/Snakeee/Snake-DQN_DoubleDQNandε-greedy.py", line 181, in train
+    total_loss = learn(num_updates, batch_size)
+  File "/Users/zhanghanxing/Desktop/work/abv/Snakeee/Snake-DQN_DoubleDQNandε-greedy.py", line 126, in learn
+    sample = memory.sample(batch_size)
+  File "/Users/zhanghanxing/Desktop/work/abv/Snakeee/replay_buffer.py", line 19, in sample
+    batch = random.sample(self.buffer, batch_size)
+  File "/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/random.py", line 482, in sample
+    raise ValueError("Sample larger than population or is negative")
+ValueError: Sample larger than population or is negative

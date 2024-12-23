@@ -1,0 +1,19 @@
+Using device: mps
+Initializing models...
+Debug - flatten_size: 512
+/Users/zhanghanxing/Desktop/chatgpt4/openai-env/lib/python3.10/site-packages/torch/_utils.py:831: UserWarning: TypedStorage is deprecated. It will be removed in the future and UntypedStorage will be the only storage class. This should only matter to you if you are using storages directly.  To access UntypedStorage directly, use tensor.untyped_storage() instead of tensor.storage()
+  return self.fget.__get__(instance, owner)()
+Debug - flatten_size: 512
+Initializing other components...
+Starting training...
+Ep.:     10, Loss: 0.000, Avg.Score: 0.80, Avg.LenOfSnake: 0.00, Max.LenOfSnake: 0.00 Time: 00:01:11
+Traceback (most recent call last):
+  File "/Users/zhanghanxing/Desktop/work/abv/Snakeee/Snake-DQN_Double DQNandCNNNoisyNetPall.py", line 226, in <module>
+    main()
+  File "/Users/zhanghanxing/Desktop/work/abv/Snakeee/Snake-DQN_Double DQNandCNNNoisyNetPall.py", line 216, in main
+    scores, avg_scores, avg_len_of_snake, max_len_of_snake = train(
+  File "/Users/zhanghanxing/Desktop/work/abv/Snakeee/Snake-DQN_Double DQNandCNNNoisyNetPall.py", line 162, in train
+    total_loss = learn(model, target_model, memory, optimizer, 
+  File "/Users/zhanghanxing/Desktop/work/abv/Snakeee/Snake-DQN_Double DQNandCNNNoisyNetPall.py", line 130, in learn
+    Q_targets_next = torch.max(next_q_value, 1)[0] * (1 - dones)
+KeyboardInterrupt
