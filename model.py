@@ -121,58 +121,19 @@ class NoisyLinear(nn.Module):
     def _scale_noise(self, size):
         x = torch.randn(size, device=self.weight_mu.device, dtype=torch.float32)  # 指定 dtype
         return x.sign().mul_(x.abs().sqrt_())
-    # def forward(self, x):
-    #     # 确保输入是 float32
-    #     x = x.float()
-
-    #     if self.training:
-    #         # 生成噪声权重
-    #         weight = self.weight_mu + self.weight_sigma * self.weight_epsilon
-    #         bias = self.bias_mu + self.bias_sigma * self.bias_epsilon
-
-    #         # 计算输出
-    #         output = F.linear(x, weight, bias)
-
-    #         # 如果需要额外的噪声注入
-    #         if self.args and hasattr(self.args, 'current1') and hasattr(self.args, 'noise'):
-    #             if self.args.current1 > 0 or self.args.noise > 0:
-    #                 arrays = []
-    #                 output = add_noise_calculate_power(
-    #                     self, 
-    #                     self.args,
-    #                     arrays,
-    #                     x,
-    #                     weight,
-    #                     output,
-    #                     layer_type='linear',
-    #                     i=0,
-    #                     layer_num=0,
-    #                     merged_dac=True
-    #                 )
-    #     else:
-    #         output = F.linear(x, self.weight_mu, self.bias_mu)
-
-    #     return output.float()  # 确保输出也是 float32
-
     def forward(self, x):
+        # 确保输入是 float32
         x = x.float()
 
         if self.training:
+            # 生成噪声权重
             weight = self.weight_mu + self.weight_sigma * self.weight_epsilon
             bias = self.bias_mu + self.bias_sigma * self.bias_epsilon
+
+            # 计算输出
             output = F.linear(x, weight, bias)
 
-            # 获取当前指标值
-            current_metric = self.get_current_metric()
-
-            # 根据指标值调整噪声
-            if self.metric_threshold is not None:
-                if current_metric > self.metric_threshold:
-                    # 可以根据需要调整噪声强度
-                    self.weight_sigma.data *= 0.95  # 降低噪声
-                elif current_metric < self.metric_threshold * 0.8:  # 添加一个缓冲区
-                    self.weight_sigma.data *= 1.05  # 增加噪声
-
+            # 如果需要额外的噪声注入
             if self.args and hasattr(self.args, 'current1') and hasattr(self.args, 'noise'):
                 if self.args.current1 > 0 or self.args.noise > 0:
                     arrays = []
@@ -188,17 +149,56 @@ class NoisyLinear(nn.Module):
                         layer_num=0,
                         merged_dac=True
                     )
-                    # 更新指标
-                    if hasattr(self, 'p4'):
-                        self.update_metrics(
-                            power=self.p4.item(),
-                            nsr=torch.mean(torch.abs(arrays[-1][0]) / torch.max(output)).item() if arrays else None,
-                            sparsity=(x > 0).float().mean().item()
-                        )
         else:
             output = F.linear(x, self.weight_mu, self.bias_mu)
 
-        return output.float()
+        return output.float()  # 确保输出也是 float32
+
+    # def forward(self, x):
+    #     x = x.float()
+
+    #     if self.training:
+    #         weight = self.weight_mu + self.weight_sigma * self.weight_epsilon
+    #         bias = self.bias_mu + self.bias_sigma * self.bias_epsilon
+    #         output = F.linear(x, weight, bias)
+
+    #         # 获取当前指标值
+    #         current_metric = self.get_current_metric()
+
+    #         # 根据指标值调整噪声
+    #         if self.metric_threshold is not None:
+    #             if current_metric > self.metric_threshold:
+    #                 # 可以根据需要调整噪声强度
+    #                 self.weight_sigma.data *= 0.95  # 降低噪声
+    #             elif current_metric < self.metric_threshold * 0.8:  # 添加一个缓冲区
+    #                 self.weight_sigma.data *= 1.05  # 增加噪声
+
+    #         if self.args and hasattr(self.args, 'current1') and hasattr(self.args, 'noise'):
+    #             if self.args.current1 > 0 or self.args.noise > 0:
+    #                 arrays = []
+    #                 output = add_noise_calculate_power(
+    #                     self, 
+    #                     self.args,
+    #                     arrays,
+    #                     x,
+    #                     weight,
+    #                     output,
+    #                     layer_type='linear',
+    #                     i=0,
+    #                     layer_num=0,
+    #                     merged_dac=True
+    #                 )
+    #                 # 更新指标
+    #                 if hasattr(self, 'p4'):
+    #                     self.update_metrics(
+    #                         power=self.p4.item(),
+    #                         nsr=torch.mean(torch.abs(arrays[-1][0]) / torch.max(output)).item() if arrays else None,
+    #                         sparsity=(x > 0).float().mean().item()
+    #                     )
+    #     else:
+    #         output = F.linear(x, self.weight_mu, self.bias_mu)
+
+    #     return output.float()
 class Net(nn.Module):
     def __init__(self, args):
         super(Net, self).__init__()

@@ -1,0 +1,41 @@
+Ep.:     10, Loss: 17.407, Avg.Score: -33.00, Avg.LenOfSnake: 5.00, Max.LenOfSnake: 5.00 Time: 00:01:27
+Traceback (most recent call last):
+  File "/Users/zhanghanxing/Desktop/work/abv/Snakeee/Snake-DQN_lrDouble DQNandNoisyNetPall.py", line 274, in <module>
+    main()
+  File "/Users/zhanghanxing/Desktop/work/abv/Snakeee/Snake-DQN_lrDouble DQNandNoisyNetPall.py", line 269, in main
+    results = trainer.train()
+  File "/Users/zhanghanxing/Desktop/work/abv/Snakeee/Snake-DQN_lrDouble DQNandNoisyNetPall.py", line 167, in train
+    total_loss = self.learn(self.config.num_updates, self.config.batch_size)
+  File "/Users/zhanghanxing/Desktop/work/abv/Snakeee/Snake-DQN_lrDouble DQNandNoisyNetPall.py", line 115, in learn
+    states, actions, rewards, next_states, dones = self.memory.sample(batch_size)
+  File "/Users/zhanghanxing/Desktop/work/abv/Snakeee/replay_buffer.py", line 57, in sample
+    batch = random.sample(list(self.buffer), batch_size)  # 转换为列表进行采样
+  File "<string>", line 2, in __getitem__
+  File "/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/multiprocessing/managers.py", line 818, in _callmethod
+    kind, result = conn.recv()
+  File "/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/multiprocessing/connection.py", line 255, in recv
+    buf = self._recv_bytes()
+  File "/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/multiprocessing/connection.py", line 419, in _recv_bytes
+    buf = self._recv(4)
+  File "/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/multiprocessing/connection.py", line 384, in _recv
+    chunk = read(handle, remaining)
+KeyboardInterrupt
+Exception ignored in atexit callback: <function _exit_function at 0x12bdcb370>
+Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/multiprocessing/util.py", line 334, in _exit_function
+    _run_finalizers(0)
+  File "/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/multiprocessing/util.py", line 300, in _run_finalizers
+    finalizer()
+  File "/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/multiprocessing/util.py", line 224, in __call__
+    res = self._callback(*self._args, **self._kwargs)
+  File "/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/multiprocessing/managers.py", line 674, in _finalize_manager
+    process.join(timeout=1.0)
+  File "/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/multiprocessing/process.py", line 149, in join
+    res = self._popen.wait(timeout)
+  File "/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/multiprocessing/popen_fork.py", line 40, in wait
+    if not wait([self.sentinel], timeout):
+  File "/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/multiprocessing/connection.py", line 936, in wait
+    ready = selector.select(timeout)
+  File "/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/selectors.py", line 416, in select
+    fd_event_list = self._selector.poll(timeout)
+KeyboardInterrupt: 

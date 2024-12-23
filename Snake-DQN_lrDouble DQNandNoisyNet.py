@@ -11,7 +11,8 @@ import random
 import numpy as np
 import torch
 import torch.nn as nn
-
+import multiprocessing as mp
+from copy import deepcopy
 
 def parse_args():
     parser = argparse.ArgumentParser(description='Snake Game DQN Training')
