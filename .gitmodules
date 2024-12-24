@@ -1,0 +1,3 @@
+[submodule "NoisyNet"]
+	path = NoisyNet
+	url = git@github.com:michaelklachko/NoisyNet.git
