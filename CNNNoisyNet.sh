@@ -6,4 +6,4 @@ python "Snake-DQN_lrDouble DQNandCNNNoisyNet.py" \
     --num_updates 20 \
     --batch_size 512 \
     --num_games 30 \
-    --checkpoint_dir ./CNNnoisynet_Tr1e-3_tgt5_iter20_3000
+    --checkpoint_dir ./CNNnoisynet_Tr1e-3_tgt5_iter20_3000_plateau

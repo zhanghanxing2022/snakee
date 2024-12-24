@@ -1,0 +1,4 @@
+Using device: cpu
+/Users/zhanghanxing/Desktop/chatgpt4/openai-env/lib/python3.10/site-packages/torch/optim/lr_scheduler.py:136: UserWarning: Detected call of `lr_scheduler.step()` before `optimizer.step()`. In PyTorch 1.1.0 and later, you should call them in the opposite order: `optimizer.step()` before `lr_scheduler.step()`.  Failure to do this will result in PyTorch skipping the first value of the learning rate schedule. See more details at https://pytorch.org/docs/stable/optim.html#how-to-adjust-learning-rate
+  warnings.warn("Detected call of `lr_scheduler.step()` before `optimizer.step()`. "
+Ep.:     10, Loss: 0.690, Avg.Score: -55.87, Avg.LenOfSnake: 5.03, Max.LenOfSnake: 6.00, Death Penalty: -1.06, LR: 1.00e-03, Time: 00:00:31

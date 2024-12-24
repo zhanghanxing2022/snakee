@@ -1,2 +1,20 @@
 Using device: cpu
 Ep.:     10, Loss: 0.607, Avg.Score: -51.87, Avg.LenOfSnake: 5.00, Max.LenOfSnake: 5.00, Death Penalty: -1.06, Epsilon: 0.1000, Time: 00:00:33
+Ep.:     20, Loss: 0.270, Avg.Score: -61.23, Avg.LenOfSnake: 5.03, Max.LenOfSnake: 6.00, Death Penalty: -1.06, Epsilon: 0.1000, Time: 00:01:10
+Ep.:     30, Loss: 0.221, Avg.Score: -52.80, Avg.LenOfSnake: 5.07, Max.LenOfSnake: 6.00, Death Penalty: -1.07, Epsilon: 0.1000, Time: 00:01:46
+Ep.:     40, Loss: 0.169, Avg.Score: -125.64, Avg.LenOfSnake: 5.20, Max.LenOfSnake: 6.00, Death Penalty: -1.07, Epsilon: 0.1000, Time: 00:02:26
+Ep.:     50, Loss: 0.188, Avg.Score: -98.76, Avg.LenOfSnake: 5.10, Max.LenOfSnake: 6.00, Death Penalty: -1.07, Epsilon: 0.1000, Time: 00:03:08
+Ep.:     60, Loss: 0.135, Avg.Score: -131.65, Avg.LenOfSnake: 5.00, Max.LenOfSnake: 5.00, Death Penalty: -1.07, Epsilon: 0.1000, Time: 00:03:50
+Ep.:     70, Loss: 0.252, Avg.Score: -107.17, Avg.LenOfSnake: 5.20, Max.LenOfSnake: 7.00, Death Penalty: -1.08, Epsilon: 0.1000, Time: 00:04:34
+Traceback (most recent call last):
+  File "/Users/zhanghanxing/Desktop/work/abv/Snakeee/Snake-DQN_lrDouble DQNandCNNNoisyNet.py", line 219, in <module>
+    optimizer.step()
+  File "/Users/zhanghanxing/Desktop/work/abv/Snakeee/Snake-DQN_lrDouble DQNandCNNNoisyNet.py", line 201, in train
+    sample = memory.sample(batch_size)
+  File "/Users/zhanghanxing/Desktop/work/abv/Snakeee/Snake-DQN_lrDouble DQNandCNNNoisyNet.py", line 169, in learn
+    next_state = get_network_input2(board.snake, board.apple)
+  File "/Users/zhanghanxing/Desktop/chatgpt4/openai-env/lib/python3.10/site-packages/torch/_tensor.py", line 492, in backward
+    torch.autograd.backward(
+  File "/Users/zhanghanxing/Desktop/chatgpt4/openai-env/lib/python3.10/site-packages/torch/autograd/__init__.py", line 251, in backward
+    Variable._execution_engine.run_backward(  # Calls into the C++ engine to run the backward pass
+KeyboardInterrupt
