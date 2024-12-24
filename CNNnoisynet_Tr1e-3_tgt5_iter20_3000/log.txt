@@ -1,0 +1,2 @@
+Using device: cpu
+Ep.:     10, Loss: 0.607, Avg.Score: -51.87, Avg.LenOfSnake: 5.00, Max.LenOfSnake: 5.00, Death Penalty: -1.06, Epsilon: 0.1000, Time: 00:00:33
