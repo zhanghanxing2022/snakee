@@ -1,3 +1,4 @@
+import argparse
 import matplotlib.pyplot as plt
 import sys
 import time
@@ -10,9 +11,64 @@ import random
 import numpy as np
 import torch
 import torch.nn as nn
-dir = "./dir_chk_6"
 
+def parse_args():
+    parser = argparse.ArgumentParser(description='Snake Game DQN Training')
+    # 已有的参数
+    parser.add_argument('--gridsize', type=int, default=15)
+    parser.add_argument('--num_episodes', type=int, default=1200)
+    parser.add_argument('--target_update_frequency', type=int, default=5)
+    parser.add_argument('--lr', type=float, default=1e-3)
+    parser.add_argument('--num_updates', type=int, default=20)
+    parser.add_argument('--batch_size', type=int, default=512)
+    parser.add_argument('--num_games', type=int, default=30)
+    parser.add_argument('--checkpoint_dir', type=str, default='./noisynet_1.4_Tr1e-3_tgt5_iter20')
+
+    # 新增的参数
+    parser.add_argument('--noise', type=float, default=0.1, help='Noise level for NoisyNet')
+    parser.add_argument('--num_bits', type=int, default=8, help='Number of bits for quantization')
+    parser.add_argument('--num_bits_weight', type=int, default=8, help='Number of bits for weight quantization')
+    return parser.parse_args()
+args = parse_args()
+class Args:
+    def __init__(self, args):
+        # 网络结构参数
+        self.input_dim = 10
+        self.hidden_dim = 20
+        self.output_dim = 5
+        self.metric_type = 'power'
+        self.use_moving_avg = True
+        self.metric_threshold = 0.5
+        self.beta = 0.99
+
+        # 从命令行参数获取
+        self.noise = args.noise
+        self.num_bits = args.num_bits
+        self.num_bits_weight = args.num_bits_weight
+
+        # 死亡惩罚相关参数
+        self.min_death_penalty = -1
+        self.max_death_penalty = -10
+        self.death_penalty_steps = args.num_episodes
+def get_death_penalty(episode, args):
+    """计算动态死亡惩罚值"""
+    x = episode / args.death_penalty_steps * 10  # 将episode映射到[0,10]范围
+    # sigmoid函数实现S形变化
+    sigmoid = 1 / (1 + np.exp(-x + 5))  # 中点在x=5处
+    # 将sigmoid值映射到[min_penalty, max_penalty]范围
+    penalty = args.min_death_penalty + (args.max_death_penalty - args.min_death_penalty) * sigmoid
+    return penalty
 # 设备选择逻辑
+# 创建目录
+dir = args.checkpoint_dir
+if not os.path.exists(dir):
+    os.makedirs(dir)
+
+# 初始化日志
+log = open(os.path.join(dir, "log.txt"), "w+", buffering=1)
+sys.stdout = log
+sys.stderr = log
+
 def get_device():
     if torch.cuda.is_available():
         return torch.device('cuda')
@@ -21,14 +77,21 @@ def get_device():
     return torch.device('cpu')
 if not os.path.exists(dir):
     os.mkdir(dir)
-log = open(os.path.join( dir,"log.txt"), "w+", buffering=1)
-sys.stdout = log
-sys.stderr = log
 epsilon = 0.1
 gridsize = 15
 GAMMA = 0.9
 device = get_device()
 print(f"Using device: {device}")
+
+# 使用 args 初始化参数
+target_update_frequency = args.target_update_frequency
+num_episodes = args.num_episodes
+num_updates = args.num_updates
+batch_size = args.batch_size
+games_in_episode = args.num_games
+gridsize = args.gridsize
+GAMMA = 0.9
+
 # 定义目标网络并复制参数
 model = QCNNNoisyNet(input_channels=4, gridsize=gridsize, output_dim=5).to(device)
 target_model =  QCNNNoisyNet(input_channels=4, gridsize=gridsize, output_dim=5).to(device)
@@ -36,17 +99,18 @@ target_model.load_state_dict(model.state_dict())
 target_model.eval()  # 将目标网络设为评估模式以避免梯度更新
 board = GameEnvironment(gridsize, nothing=0, dead=-1, apple=1)
 memory = ReplayMemory(1000)
-optimizer = torch.optim.Adam(model.parameters(), lr=1e-5)
+optimizer = torch.optim.Adam(model.parameters(), lr=args.lr)
 
 
-def run_episode(num_games):
+def run_episode(num_games,current_episode):
     run = True
     move = 0
     games_played = 0
     total_reward = 0
     episode_games = 0
     len_array = []
-
+    current_death_penalty = get_death_penalty(current_episode, Args(args))
+    board.reward_dead = current_death_penalty
     while run:
         state = get_network_input2(board.snake, board.apple)
         with torch.no_grad():
@@ -73,7 +137,6 @@ def run_episode(num_games):
 
 
 # 设置目标网络更新频率
-target_update_frequency = 100  # 例如，每隔100次learn调用更新一次目标网络
 
 MSE=nn.MSELoss()
 def learn(num_updates, batch_size):
@@ -109,14 +172,7 @@ def learn(num_updates, batch_size):
             target_model.load_state_dict(model.state_dict())
 
     return total_loss
-num_episodes = 60000
-num_episodes = 12000
-num_updates = 500
 print_every = 10
-games_in_episode = 30
-batch_size = 20
-
-
 def train():
 
     scores_deque = deque(maxlen=100)
@@ -131,8 +187,8 @@ def train():
     for i_episode in range(num_episodes+1):
 
         # print('i_episode: ', i_episode)
-
-        score, avg_len, max_len = run_episode(games_in_episode)
+        
+        score, avg_len, max_len = run_episode(games_in_episode,i_episode)
 
         scores_deque.append(score)
         scores_array.append(score)
@@ -147,8 +203,10 @@ def train():
         dt = (int)(time.time() - time_start)
 
         if i_episode % print_every == 0 and i_episode > 0:
-            print('Ep.: {:6}, Loss: {:.3f}, Avg.Score: {:.2f}, Avg.LenOfSnake: {:.2f}, Max.LenOfSnake:  {:.2f} Time: {:02}:{:02}:{:02} '.
-                  format(i_episode, total_loss, score, avg_len, max_len, dt//3600, dt % 3600//60, dt % 60))
+            print('Ep.: {:6}, Loss: {:.3f}, Avg.Score: {:.2f}, Avg.LenOfSnake: {:.2f}, '
+                  'Max.LenOfSnake: {:.2f}, Death Penalty: {:.2f}, Epsilon: {:.4f}, Time: {:02}:{:02}:{:02}'.format(
+                      i_episode, total_loss, score, avg_len, max_len, board.reward_dead, epsilon,
+                      dt//3600, dt % 3600//60, dt % 60))
 
         memory.truncate()
 
@@ -163,40 +221,3 @@ scores, avg_scores, avg_len_of_snake, max_len_of_snake = train()
 print('length of scores: ', len(scores),
       ', len of avg_scores: ', len(avg_scores))
 
-fig = plt.figure()
-ax = fig.add_subplot(111)
-plt.plot(np.arange(1, len(scores)+1), scores, label="Score")
-plt.plot(np.arange(1, len(avg_scores)+1), avg_scores,
-         label="Avg score on 100 episodes")
-plt.legend(bbox_to_anchor=(1.05, 1))
-plt.ylabel('Score')
-plt.xlabel('Episodes #')
-plt.savefig(os.path.join(dir, "scores.png"))
-# plt.show()
-ax1 = fig.add_subplot(121)
-plt.plot(np.arange(1, len(avg_len_of_snake)+1),
-         avg_len_of_snake, label="Avg Len of Snake")
-plt.plot(np.arange(1, len(max_len_of_snake)+1),
-         max_len_of_snake, label="Max Len of Snake")
-plt.legend(bbox_to_anchor=(1.05, 1))
-plt.ylabel('Length of Snake')
-plt.xlabel('Episodes #')
-# plt.show()
-plt.savefig(os.path.join(dir, "Length.png"))
-
-n, bins, patches = plt.hist(
-    max_len_of_snake, 45, density=1, facecolor='green', alpha=0.75)
-l = plt.plot(np.arange(1, len(bins) + 1), 'r--', linewidth=1)
-mu = round(np.mean(max_len_of_snake), 2)
-sigma = round(np.std(max_len_of_snake), 2)
-median = round(np.median(max_len_of_snake), 2)
-print('mu: ', mu, ', sigma: ', sigma, ', median: ', median)
-plt.xlabel('Max.Lengths, mu = {:.2f}, sigma={:.2f},  median: {:.2f}'.format(
-    mu, sigma, median))
-plt.ylabel('Probability')
-plt.title('Histogram of Max.Lengths')
-plt.axis([4, 44, 0, 0.15])
-plt.grid(True)
-plt.savefig(os.path.join(dir, "Max Length.png"))
-
-# plt.show()

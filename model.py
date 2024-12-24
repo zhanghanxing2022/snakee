@@ -3,7 +3,7 @@ import numpy as np
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
-from NoisyNet.hardware_model import add_noise_calculate_power
+from NoisyNet.hardware_model import NoisyConv2d, add_noise_calculate_power
 
 class NoisyLinear(nn.Module):
     def __init__(self, in_features, out_features, std_init=0.4, args=None):
@@ -154,51 +154,6 @@ class NoisyLinear(nn.Module):
 
         return output.float()  # 确保输出也是 float32
 
-    # def forward(self, x):
-    #     x = x.float()
-
-    #     if self.training:
-    #         weight = self.weight_mu + self.weight_sigma * self.weight_epsilon
-    #         bias = self.bias_mu + self.bias_sigma * self.bias_epsilon
-    #         output = F.linear(x, weight, bias)
-
-    #         # 获取当前指标值
-    #         current_metric = self.get_current_metric()
-
-    #         # 根据指标值调整噪声
-    #         if self.metric_threshold is not None:
-    #             if current_metric > self.metric_threshold:
-    #                 # 可以根据需要调整噪声强度
-    #                 self.weight_sigma.data *= 0.95  # 降低噪声
-    #             elif current_metric < self.metric_threshold * 0.8:  # 添加一个缓冲区
-    #                 self.weight_sigma.data *= 1.05  # 增加噪声
-
-    #         if self.args and hasattr(self.args, 'current1') and hasattr(self.args, 'noise'):
-    #             if self.args.current1 > 0 or self.args.noise > 0:
-    #                 arrays = []
-    #                 output = add_noise_calculate_power(
-    #                     self, 
-    #                     self.args,
-    #                     arrays,
-    #                     x,
-    #                     weight,
-    #                     output,
-    #                     layer_type='linear',
-    #                     i=0,
-    #                     layer_num=0,
-    #                     merged_dac=True
-    #                 )
-    #                 # 更新指标
-    #                 if hasattr(self, 'p4'):
-    #                     self.update_metrics(
-    #                         power=self.p4.item(),
-    #                         nsr=torch.mean(torch.abs(arrays[-1][0]) / torch.max(output)).item() if arrays else None,
-    #                         sparsity=(x > 0).float().mean().item()
-    #                     )
-    #     else:
-    #         output = F.linear(x, self.weight_mu, self.bias_mu)
-
-    #     return output.float()
 class Net(nn.Module):
     def __init__(self, args):
         super(Net, self).__init__()
@@ -295,41 +250,62 @@ def get_network_input2(player, apple):
 
 
 class QCNNNoisyNet(nn.Module):
-    def __init__(self, input_channels=4, gridsize=15, output_dim=5):
+    def __init__(self, input_channels=4, gridsize=15, output_dim=5, args=None):
         super(QCNNNoisyNet, self).__init__()
-       # 使用更小的卷积核和更少的通道
-        self.conv1 = nn.Conv2d(input_channels, 16, kernel_size=3, stride=2, padding=1)
-        self.conv2 = nn.Conv2d(16, 32, kernel_size=3, stride=2, padding=1)
+
+        # 使用 NoisyConv2d 替换普通 Conv2d
+        self.conv1 = NoisyConv2d(
+            in_channels=input_channels, 
+            out_channels=16, 
+            kernel_size=3, 
+            stride=2, 
+            padding=1,
+            num_bits=args.num_bits if hasattr(args, 'num_bits') else 0,
+            num_bits_weight=args.num_bits_weight if hasattr(args, 'num_bits_weight') else 0,
+            noise=args.noise if hasattr(args, 'noise') else 0
+        )
+
+        self.conv2 = NoisyConv2d(
+            in_channels=16, 
+            out_channels=32, 
+            kernel_size=3, 
+            stride=2, 
+            padding=1,
+            num_bits=args.num_bits if hasattr(args, 'num_bits') else 0,
+            num_bits_weight=args.num_bits_weight if hasattr(args, 'num_bits_weight') else 0,
+            noise=args.noise if hasattr(args, 'noise') else 0
+        )
 
         # 计算卷积后的特征图大小
-        # 经过两次stride=2的卷积，特征图大小变为原来的1/4（向上取整）
-        conv_output_size = (int(gridsize) + 1) // 4 
-        # conv_output_size =  4 
-        # 15->8->4
+        conv_output_size = (int(gridsize) + 1) // 4
         self.flatten_size = 32 * conv_output_size * conv_output_size
 
-        print(f"Debug - flatten_size: {self.flatten_size}")  # 添加调试信息
-
-        self.fc1 = NoisyLinear(self.flatten_size,128)
-        self.fc2 = NoisyLinear(128, output_dim)
+        # Noisy全连接层
+        self.fc1 = NoisyLinear(self.flatten_size, 128, args=args)
+        self.fc2 = NoisyLinear(128, output_dim, args=args)
 
         self.relu = nn.ReLU()
         self.flatten = nn.Flatten()
 
+        # 保存参数以便后续使用
+        self.args = args
+
     def forward(self, x):
-        # 添加batch维度如果需要
         if len(x.shape) == 3:
             x = x.unsqueeze(0)
 
         x = self.relu(self.conv1(x))
         x = self.relu(self.conv2(x))
         x = self.flatten(x)
-        # 打印调试信息
-        # print(f"Debug - flattened shape: {x.shape}")
-
         x = self.relu(self.fc1(x))
         x = self.fc2(x)
         return x
+
     def reset_noise(self):
+        # 重置所有噪声层的噪声
+        if hasattr(self.conv1, 'reset_noise'):
+            self.conv1.reset_noise()
+        if hasattr(self.conv2, 'reset_noise'):
+            self.conv2.reset_noise()
         self.fc1.reset_noise()
         self.fc2.reset_noise()
